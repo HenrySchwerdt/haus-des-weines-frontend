@@ -1,19 +1,36 @@
-import React from 'react'
-import './globals.scss'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import { Inter } from "next/font/google";
+import HeaderServer from "@/components/header/Server";
+import FooterServer from "@/components/footer/Server";
+
+
+
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
-/* Our app sits here to not cause any conflicts with payload's root layout  */
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const metadata = {
+  title: "Haus des Weines",
+  description: "",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
   return (
-    <html className={inter.className}>
-      <body>{children}</body>
+    <html>
+      <body className={`font-sans ${inter.variable} flex flex-col min-h-screen`}>
+        <HeaderServer />
+        {children}
+        <FooterServer />
+      </body>
     </html>
-  )
+  );
 }
-
-export default Layout

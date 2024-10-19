@@ -11,18 +11,32 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
+    producer: Producer;
+    event: Event;
+    'menu-type': MenuType;
+    wine: Wine;
+    'normal-item': NormalItem;
+    food: Food;
+    'clothing-categories': ClothingCategory;
+    clothing: Clothing;
     users: User;
-    pages: Page;
     media: Media;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
-  globals: {};
-  locale: null;
+  globals: {
+    header: Header;
+    hero: Hero;
+    'event-room': EventRoom;
+    about: About;
+    contact: Contact;
+    footer: Footer;
+  };
+  locale: 'en' | 'de';
   user: User & {
     collection: 'users';
   };
@@ -47,43 +61,28 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "producer".
  */
-export interface User {
-  id: string;
+export interface Producer {
+  id: number;
+  name: string;
+  link: string;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
+ * via the `definition` "event".
  */
-export interface Page {
-  id: string;
-  title?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+export interface Event {
+  id: number;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  image?: (number | null) | Media;
+  recurring: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -92,7 +91,7 @@ export interface Page {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   text?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -108,32 +107,156 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-type".
+ */
+export interface MenuType {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wine".
+ */
+export interface Wine {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  priceBottle: number;
+  harvest?: string | null;
+  taste: string;
+  producer: number | Producer;
+  type?: (number | null) | MenuType;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "normal-item".
+ */
+export interface NormalItem {
+  id: number;
+  title: string;
+  description?: string | null;
+  price?:
+    | {
+        value: number;
+        id?: string | null;
+      }[]
+    | null;
+  type?: (number | null) | MenuType;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "food".
+ */
+export interface Food {
+  id: number;
+  number: number;
+  title: string;
+  description: string;
+  price: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clothing-categories".
+ */
+export interface ClothingCategory {
+  id: number;
+  category: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clothing".
+ */
+export interface Clothing {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  salePrice?: number | null;
+  image?: (number | null) | Media;
+  category: number | ClothingCategory;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: string | User;
+        relationTo: 'producer';
+        value: number | Producer;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: string | Page;
+        relationTo: 'event';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'menu-type';
+        value: number | MenuType;
+      } | null)
+    | ({
+        relationTo: 'wine';
+        value: number | Wine;
+      } | null)
+    | ({
+        relationTo: 'normal-item';
+        value: number | NormalItem;
+      } | null)
+    | ({
+        relationTo: 'food';
+        value: number | Food;
+      } | null)
+    | ({
+        relationTo: 'clothing-categories';
+        value: number | ClothingCategory;
+      } | null)
+    | ({
+        relationTo: 'clothing';
+        value: number | Clothing;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null);
   globalSlug?: string | null;
-  _lastEdited: {
-    user: {
-      relationTo: 'users';
-      value: string | User;
-    };
-    editedAt?: string | null;
+  user: {
+    relationTo: 'users';
+    value: number | User;
   };
-  isLocked?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -142,10 +265,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -165,11 +288,153 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  logo: number | Media;
+  navigation?:
+    | {
+        label: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: number;
+  backgroundImage: number | Media;
+  sloganImage: number | Media;
+  openingHours?:
+    | {
+        title: string;
+        list?:
+          | {
+              timespan: string;
+              hours: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'opening-hours';
+      }[]
+    | null;
+  heading: string;
+  subheading: string;
+  primary: {
+    label: string;
+    url: string;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'action';
+  }[];
+  secondary: {
+    label: string;
+    url: string;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'action';
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-room".
+ */
+export interface EventRoom {
+  id: number;
+  title: string;
+  description: string;
+  interior_label: string;
+  interior?:
+    | {
+        item: string;
+        id?: string | null;
+      }[]
+    | null;
+  ask_label: string;
+  fotos?:
+    | {
+        photo: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: number;
+  title: string;
+  paragraph1: string;
+  paragraph2: string;
+  paragraph3: string;
+  fotos: number | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  title: string;
+  email_label: string;
+  email: string;
+  address_label: string;
+  address: string;
+  phone_label: string;
+  phone: string;
+  name_label: string;
+  message_label: string;
+  send_label: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  logo: number | Media;
+  rights: string;
+  topNavigation?:
+    | {
+        label: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  bottomNavigation?:
+    | {
+        label: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
