@@ -126,7 +126,6 @@ export const WineItem: CollectionConfig = {
         },
         {
             name: 'type',
-            type: 'text',
             label: {
                 en: 'Type',
                 de: 'Typ',
