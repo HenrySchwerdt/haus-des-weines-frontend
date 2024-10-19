@@ -91,7 +91,7 @@ export default buildConfig({
 
   },
   async onInit(payload) {
-    await init(payload)
+    // await init(payload)
   },
   sharp,
 })
