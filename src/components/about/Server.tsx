@@ -28,6 +28,7 @@ export async function AboutServer() {
                             fill // Use fill for responsive image
                             className="rounded-md object-cover object-center"
                             quality={100}
+                            unoptimized={true}
                         />
                     </div>
                 </div>
