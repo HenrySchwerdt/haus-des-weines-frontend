@@ -19,6 +19,7 @@ export function UpComing({
                     width={120}
                     height={120}
                     className="rounded-md object-cover"
+                    unoptimized={true}
                 />
             </div>
         )}

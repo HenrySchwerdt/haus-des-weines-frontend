@@ -54,6 +54,7 @@ export async function EventRoomServer() {
                                         alt='Event Room Image'
                                         className='rounded-md object-cover object-center'
                                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw" // Ensure this is set for performance
+                                        unoptimized={true}
                                     />
                                 </CarouselItem>
                             ))}

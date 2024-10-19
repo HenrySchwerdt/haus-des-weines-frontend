@@ -26,6 +26,7 @@ export function HeaderComponent({ logo, navigation }: Header) {
                         src={(logo as Media).url!}
                         alt=""
                         className="h-4"
+                        unoptimized={true}
                     />
                 </Link>
                 <div className="sm:hidden">

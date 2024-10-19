@@ -39,6 +39,7 @@ export default function HeroClient({ hero }: { hero: Hero }) {
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
                     priority
                     className="filter brightness-25 md:brightness-50 lg:brightness-70"
+                    unoptimized={true}
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-center max-w-[520px] mx-auto px-4 md:px-0 md:mx-20 hero-content">
                     <motion.div
@@ -53,6 +54,7 @@ export default function HeroClient({ hero }: { hero: Hero }) {
                             height={250}
                             style={{ objectFit: 'scale-down' }}
                             quality={100}
+                            unoptimized={true}
                         />
                     </motion.div>
                     <div className="mt-4 w-full">
