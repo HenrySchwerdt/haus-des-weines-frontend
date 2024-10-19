@@ -68,7 +68,6 @@ export const NormalItem: CollectionConfig = {
         },
         {
             name: 'type',
-            type: 'text',
             label: {
                 en: 'Type',
                 de: 'Typ',
