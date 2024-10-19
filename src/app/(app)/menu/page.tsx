@@ -20,6 +20,10 @@ export default async function Menu() {
     const wines = winesDocs.docs;
     const normalItems = normalDocs.docs;
 
+    if (!wines.length && !normalItems.length) {
+        return <div className='mx-auto'>No items found</div>
+    }
+
     return (<div className='mx-auto'><MenuGroup title={(wines[0].type! as MenuType).name}>
         {wines.map((wine) => (
             <WineMenuItem key={wine.id} {...wine} />
