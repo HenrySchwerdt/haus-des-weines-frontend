@@ -30,7 +30,7 @@ export function HeaderComponent({ logo, navigation }: Header) {
                         unoptimized={true}
                     />
                 </Link>
-                <div className="sm:hidden">
+                <div className="sm:hidden flex gap-5 justify-center items-center">
                     <LanguageSwitch />
                     <button type='button' onClick={toggleMenu}>
                         <motion.svg
