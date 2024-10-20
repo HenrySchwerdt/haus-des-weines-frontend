@@ -1,6 +1,7 @@
 import { Divider } from '@/components/common/Divider';
 import config from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
+import styles from '../globals.module.css';
 export default async function DataPrivacy({
     params: { locale },
 }: {
@@ -22,7 +23,7 @@ export default async function DataPrivacy({
             <div className='max-w-[1200px] w-full md:w-[800px]'>
                 <h1 className='text-2xl my-3 font-vollkorn font-bold'>{privacy.title}</h1>
                 <Divider bgColor='bg-rouge' />
-                <div className='font-vollkorn mt-2' dangerouslySetInnerHTML={{ __html: privacy.content_html! }}>
+                <div className={'font-vollkorn mt-2' + styles.container} dangerouslySetInnerHTML={{ __html: privacy.content_html! }}>
                 </div>
             </div>
         </div>
