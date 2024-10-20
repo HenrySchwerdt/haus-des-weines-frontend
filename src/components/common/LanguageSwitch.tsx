@@ -9,7 +9,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useRouter } from "next/router";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type Language = {
     code: string;
@@ -22,12 +22,13 @@ const languages: Language[] = [
 ];
 
 export default function LanguageSwitch() {
+    const params = useSearchParams()
+    const pathName = usePathname()
     const router = useRouter();
-    const { query } = router;
 
     // Set the initial language based on the "lang" query parameter, defaulting to "de"
     const getInitialLanguage = (): Language => {
-        const langFromQuery = query.lang;
+        const langFromQuery = params.get("lang");
         const foundLanguage = languages.find(
             (lang) => lang.code === langFromQuery
         );
@@ -40,14 +41,9 @@ export default function LanguageSwitch() {
     const handleLanguageChange = (language: Language) => {
         setCurrentLanguage(language);
 
-        router.push(
-            {
-                pathname: router.pathname,
-                query: { ...query, lang: language.code },
-            },
-            undefined,
-            { scroll: false }
-        );
+        router.push(pathName + `?lang=${language.code}`, {
+            scroll: false,
+        });
     };
 
     return (
