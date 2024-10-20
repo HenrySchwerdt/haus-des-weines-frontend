@@ -5,7 +5,7 @@ import { WineMenuItem } from '@/components/menu/WineMenuItem';
 import config from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { MenuType } from 'payload-types';
-
+export const dynamic = "force-dynamic";
 export default async function Menu() {
     const payload = await getPayloadHMR({
         config,
