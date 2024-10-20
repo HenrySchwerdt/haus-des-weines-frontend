@@ -22,6 +22,8 @@ import { Contact } from 'global/contact/schema'
 import { MenuType } from 'collections/menu-type'
 import { NormalItem } from 'collections/normal-item'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { Imprint } from 'global/imprint/schema'
+import { Privacy } from 'global/privacy/schema'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,6 +45,8 @@ export default buildConfig({
     Header,
     Hero,
     EventRoom,
+    Imprint,
+    Privacy,
     About,
     Contact,
     Footer,
