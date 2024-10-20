@@ -53,7 +53,7 @@ export function HeaderComponent({ logo, navigation }: Header) {
                     </button>
                 </div>
                 {/* Desktop menu */}
-                <div className="hidden sm:flex gap-5">
+                <div className="hidden sm:flex gap-5 justify-center items-center">
                     {navigation?.map((nav) => (
                         <Link key={nav.id} href={nav.link}>{nav.label}</Link>
                     ))}
