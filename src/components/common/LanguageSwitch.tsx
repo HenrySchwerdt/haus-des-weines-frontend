@@ -25,19 +25,16 @@ const languages: Language[] = [
 export default function LanguageSwitch() {
     const router = useRouter();
     const pathName = usePathname();
-    const params = useParams(); // This will give access to locale params
+    const params = useParams();
 
-    // Get current locale from the params
-    const currentLocale = params?.locale || "de"; // Fallback to 'de' if no locale
+    const currentLocale = params?.locale || "de";
 
-    // Set the current language based on the locale in the URL
     const currentLanguage = languages.find(
         (lang) => lang.code === currentLocale
-    ) || languages[0]; // Default to "de"
+    ) || languages[0];
 
     const handleLanguageChange = (language: Language) => {
         if (language.code !== currentLocale) {
-            // Replace the locale in the pathname
             const newPathname = `/${language.code}${pathName.replace(`/${currentLocale}`, "")}`;
             router.push(newPathname);
         }

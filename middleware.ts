@@ -15,7 +15,7 @@ export async function middleware(req: NextRequest) {
     if (!localePrefix && pathname === '/') {
         const url = req.nextUrl.clone();
         url.pathname = `/${defaultLocale}${pathname}`;
-        return NextResponse.redirect(url);
+        return NextResponse.rewrite(url);
     }
 
     return i18nRouter(req, i18Config);
