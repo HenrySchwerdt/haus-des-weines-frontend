@@ -7,9 +7,19 @@ export async function middleware(req: NextRequest) {
     }
     if (req.nextUrl.pathname.startsWith('/api')) {
         return NextResponse.next();
-    } else {
-        return i18nRouter(req, i18Config);
     }
+    const { pathname } = req.nextUrl;
+    const { defaultLocale, locales } = i18Config;
+    const localePrefix = locales.find((locale) => pathname.startsWith(`/${locale}`));
+
+    if (!localePrefix && pathname === '/') {
+        const url = req.nextUrl.clone();
+        url.pathname = `/${defaultLocale}${pathname}`;
+        return NextResponse.redirect(url);
+    }
+
+    return i18nRouter(req, i18Config);
+
 
 }
 export const config = {
