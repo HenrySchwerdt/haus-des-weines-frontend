@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { Media } from 'payload-types';
 import { Divider } from '../common/Divider';
 
-export async function AboutServer() {
+export async function AboutServer({ lang }: { lang: 'en' | 'de' }) {
     const payload = await getPayloadHMR({
         config,
     })
 
     const about = await payload.findGlobal({
         slug: 'about',
+        locale: lang
     })
     return (
         <section id="about" className="lg:px-14 px-4 md:px-6 relative bg-red-200">

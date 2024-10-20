@@ -3,9 +3,6 @@ import { Inter } from "next/font/google";
 import HeaderServer from "@/components/header/Server";
 import FooterServer from "@/components/footer/Server";
 
-
-
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -20,16 +17,19 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  searchParams,
 }: {
   children: React.ReactNode;
+  searchParams?: { lang?: string };
 }) {
+  const lang: 'de' | 'en' = searchParams?.lang === 'en' ? 'en' : 'de';
 
   return (
-    <html>
-      <body className={`font-sans ${inter.variable} flex flex-col min-h-screen`}>
-        <HeaderServer />
+    <html lang={lang}>
+      <body className={`font-sans flex flex-col min-h-screen`}>
+        <HeaderServer lang={lang} />
         {children}
-        <FooterServer />
+        <FooterServer lang={lang} />
       </body>
     </html>
   );

@@ -5,13 +5,14 @@ import { Media } from 'payload-types';
 import { Divider } from '../common/Divider';
 import Image from 'next/image';
 
-export async function EventRoomServer() {
+export async function EventRoomServer({ lang }: { lang: 'en' | 'de' }) {
     const payload = await getPayloadHMR({
         config,
     });
 
     const eventRoom = await payload.findGlobal({
         slug: 'event-room',
+        locale: lang,
     });
 
     return (

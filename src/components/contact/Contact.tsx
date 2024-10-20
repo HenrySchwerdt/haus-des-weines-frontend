@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Phone, Mail, Send } from "lucide-react"
 import { Contact } from 'payload-types';
 
-export default function ContactSection({ title, address_label, address, phone_label, phone, email_label, email, name_label, message_label, send_label }: Contact & { locale: string }) {
-    const locale = 'de';
+export default function ContactSection({ title, address_label, address, phone_label, phone, email_label, email, name_label, message_label, send_label, locale }: Contact & { locale: string }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',

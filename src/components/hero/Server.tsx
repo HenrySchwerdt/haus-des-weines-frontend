@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { Hero, Media } from 'payload-types';
 
 
-export default async function HeroServer() {
+export default async function HeroServer({ lang }: { lang: 'en' | 'de' }) {
     const payload = await getPayloadHMR({
         config,
     })
 
     const hero: Hero = await payload.findGlobal({
         slug: 'hero',
+        locale: lang
     })
 
     return (

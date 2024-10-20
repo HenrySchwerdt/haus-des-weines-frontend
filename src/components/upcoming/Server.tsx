@@ -41,13 +41,14 @@ function getBestFiveEvents(events: Event[]): Event[] {
     return eventsFromTodayOrClosestInFuture.slice(0, 5);
 }
 
-export default async function UpComingServer() {
+export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
     const payload = await getPayloadHMR({
         config,
     })
 
     const eventDocs = await payload.find({
         collection: 'event',
+        locale: lang,
         pagination: false,
     })
     if (!eventDocs.docs) {

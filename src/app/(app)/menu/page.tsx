@@ -6,16 +6,23 @@ import config from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { MenuType } from 'payload-types';
 export const dynamic = "force-dynamic";
-export default async function Menu() {
+export default async function Menu({
+    searchParams,
+}: {
+    searchParams: { lang?: string };
+}) {
+    const lang: 'de' | 'en' = searchParams.lang === 'en' ? 'en' : 'de';
     const payload = await getPayloadHMR({
         config,
     })
 
     const winesDocs = await payload.find({
         collection: 'wine',
+        locale: lang,
     })
     const normalDocs = await payload.find({
         collection: 'normal-item',
+        locale: lang,
     })
 
     const wines = winesDocs.docs;
