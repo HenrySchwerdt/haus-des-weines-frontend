@@ -8,16 +8,10 @@ export async function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith('/api')) {
         return NextResponse.next();
     }
-    const { pathname } = req.nextUrl;
-    const { defaultLocale, locales } = i18Config;
-    const localePrefix = locales.find((locale) => pathname.startsWith(`/${locale}`));
-
-    if (!localePrefix && pathname === '/') {
-        const url = req.nextUrl.clone();
-        url.pathname = `/${defaultLocale}${pathname}`;
-        return NextResponse.rewrite(url);
+    // when on / home page redirect to /de
+    if (req.nextUrl.pathname === '/') {
+        return NextResponse.redirect('/de');
     }
-
     return i18nRouter(req, i18Config);
 
 

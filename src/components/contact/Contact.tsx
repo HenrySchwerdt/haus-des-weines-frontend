@@ -86,6 +86,7 @@ export default function ContactSection({ title, address_label, address, phone_la
             }).then((data) => {
                 alert(data[locale] || 'Message sent successfully');
                 setFormData({ name: '', email: '', message: '' });
+                setIsFormValid(false);
             }).catch((error) => {
                 console.error('Error sending message:', error);
                 alert('Failed to send message');
