@@ -17,7 +17,7 @@ export default async function FooterServer({ lang }: { lang: 'en' | 'de' }) {
     return <footer id="footer" className="flex flex-col gap-6 font-julius mt-20">
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-8 md:gap-0 lg:px-14 px-4 md:px-6">
             <Link href="/" className="flex gap-1 items-center">
-                <Image width={150} height={10} src={(footer.logo as Media).url!} alt="" className="h-4" />
+                <Image width={150} height={10} src={(footer.logo as Media).url!} unoptimized={true} alt="" className="h-4" />
             </Link>
             <div className="flex gap-5 text-sm">
                 {footer.topNavigation?.map((nav) => (<Link key={nav.id} href={nav.link}>{nav.label}</Link>))}

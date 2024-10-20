@@ -18,9 +18,9 @@ export default async function HeroServer({ lang }: { lang: 'en' | 'de' }) {
     return (
         <section id='hero'>
             <div className='w-full relative h-[640px]'>
-                <Image src={(hero.backgroundImage as Media).url!} alt='Hero image' fill style={{ objectFit: 'cover', objectPosition: 'center' }} priority className="filter brightness-25 md:brightness-50 lg:brightness-70" />
+                <Image src={(hero.backgroundImage as Media).url!} alt='Hero image' fill style={{ objectFit: 'cover', objectPosition: 'center' }} unoptimized={true} priority className="filter brightness-25 md:brightness-50 lg:brightness-70" />
                 <div className='absolute inset-0 flex flex-col justify-center items-center max-w-[520px] mx-auto px-4 md:px-0  md:mx-20'>
-                    <Image src={(hero.sloganImage as Media).url!} alt='Slogan' width={400} height={250} style={{ objectFit: 'scale-down' }} quality={100} />
+                    <Image src={(hero.sloganImage as Media).url!} alt='Slogan' width={400} height={250} style={{ objectFit: 'scale-down' }} unoptimized={true} quality={100} />
                     <div className='mt-4 w-full'>
                         <Divider bgColor="bg-red-300" />
                     </div>
