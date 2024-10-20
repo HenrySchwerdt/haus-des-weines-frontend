@@ -2,7 +2,24 @@ import path from 'path'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import { de } from 'payload/i18n/de'
-import { slateEditor } from '@payloadcms/richtext-slate'
+import {
+  AlignFeature,
+  BlockquoteFeature,
+  BlocksFeature,
+  BoldFeature,
+  ChecklistFeature,
+  HeadingFeature,
+  IndentFeature,
+  InlineCodeFeature,
+  ItalicFeature,
+  lexicalEditor,
+  LinkFeature,
+  OrderedListFeature,
+  ParagraphFeature,
+  RelationshipFeature,
+  UnorderedListFeature,
+  UploadFeature,
+} from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
@@ -15,7 +32,6 @@ import { Footer } from 'global/footer/schema'
 import { Hero } from 'global/hero/schema'
 import { EventItem } from 'collections/events'
 import { Producer } from 'collections/producer'
-import init from 'init'
 import { EventRoom } from 'global/event-room/schema'
 import { About } from 'global/about/schema'
 import { Contact } from 'global/contact/schema'
@@ -29,15 +45,13 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  editor: slateEditor({}),
+  editor: lexicalEditor(),
   plugins: [
     vercelBlobStorage({
-      enabled: true, // Optional, defaults to true
-      // Specify which collections should use Vercel Blob
+      enabled: true,
       collections: {
         "media": true,
       },
-      // Token provided by Vercel once Blob storage is added to your Vercel project
       token: process.env.BLOB_READ_WRITE_TOKEN!,
     }),
   ],
