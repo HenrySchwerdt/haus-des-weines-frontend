@@ -402,6 +402,7 @@ export interface Imprint {
     };
     [k: string]: unknown;
   };
+  content_html?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -427,6 +428,7 @@ export interface Privacy {
     };
     [k: string]: unknown;
   };
+  content_html?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

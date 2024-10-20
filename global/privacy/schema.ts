@@ -1,3 +1,4 @@
+import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
 import { GlobalConfig } from "payload";
 
 export const Privacy: GlobalConfig = {
@@ -24,8 +25,16 @@ export const Privacy: GlobalConfig = {
                 de: 'Inhalt'
             },
             type: 'richText',
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    HTMLConverterFeature({}),
+                ],
+            }),
+
             localized: true,
             required: true
-        }
+        },
+        lexicalHTML('content', { name: 'content_html' }),
     ]
 }
