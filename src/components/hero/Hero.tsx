@@ -40,6 +40,7 @@ export default function HeroClient({ hero }: { hero: Hero }) {
                     priority
                     className="filter brightness-25 md:brightness-50 lg:brightness-70"
                     unoptimized={true}
+                    fetchPriority='high'
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-center max-w-[520px] mx-auto px-4 md:px-0 md:mx-20 hero-content">
                     <motion.div
