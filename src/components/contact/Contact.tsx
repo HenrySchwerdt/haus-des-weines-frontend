@@ -6,22 +6,93 @@ import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Phone, Mail, Send } from "lucide-react"
 import { Contact } from 'payload-types';
 
-export default function ContactSection({ title, address_label, address, phone_label, phone, email_label, email, name_label, message_label, send_label }: Contact) {
+export default function ContactSection({ title, address_label, address, phone_label, phone, email_label, email, name_label, message_label, send_label }: Contact & { locale: string }) {
+    const locale = 'de';
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
-    })
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    const validateName = (name: string) => {
+        if (name.trim() === '') {
+            return { en: 'Name is required', de: 'Name ist erforderlich' }[locale]!;
+        }
+        return '';
+    };
+
+    const validateEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            return { en: 'Email is required', de: 'E-Mail ist erforderlich' }[locale]!;
+        } else if (!emailRegex.test(email)) {
+            return { en: 'Invalid email address', de: 'Ungültige E-Mail-Adresse' }[locale]!;
+        }
+        return '';
+    };
+
+    const validateMessage = (message: string) => {
+        if (message.trim() === '') {
+            return { en: 'Message is required', de: 'Nachricht ist erforderlich' }[locale]!;
+        }
+        return '';
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        let error = '';
+        switch (name) {
+            case 'name':
+                error = validateName(value);
+                break;
+            case 'email':
+                error = validateEmail(value);
+                break;
+            case 'message':
+                error = validateMessage(value);
+                break;
+            default:
+                break;
+        }
+        setFormErrors({ ...formErrors, [name]: error });
+
+        setIsFormValid(
+            validateName(formData.name) === '' &&
+            validateEmail(formData.email) === '' &&
+            validateMessage(formData.message) === ''
+        );
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Handle form submission here
-        console.log('Form submitted:', formData)
-    }
+        e.preventDefault();
+        if (isFormValid) {
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            }).then((res) => {
+                return res.json();
+            }).then((data) => {
+                alert(data[locale] || 'Message sent successfully');
+                setFormData({ name: '', email: '', message: '' });
+            }).catch((error) => {
+                console.error('Error sending message:', error);
+                alert('Failed to send message');
+            });
+        }
+    };
 
     return (
         <section id="contact" className="bg-white py-12 px-4 md:px-8">
@@ -73,9 +144,9 @@ export default function ContactSection({ title, address_label, address, phone_la
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    required
                                     className="mt-1 font-julius"
                                 />
+                                {formErrors.name && <span className="text-red-500 text-sm">{formErrors.name}</span>}
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 font-julius">{email_label}</label>
@@ -85,9 +156,9 @@ export default function ContactSection({ title, address_label, address, phone_la
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    required
                                     className="mt-1 font-julius"
                                 />
+                                {formErrors.email && <span className="text-red-500 text-sm">{formErrors.email}</span>}
                             </div>
                             <div className="flex-grow flex flex-col">
                                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 font-julius">{message_label}</label>
@@ -96,13 +167,14 @@ export default function ContactSection({ title, address_label, address, phone_la
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    required
                                     className="mt-1 flex-grow resize-none font-julius"
                                 />
+                                {formErrors.message && <span className="text-red-500 text-sm">{formErrors.message}</span>}
                             </div>
                             <Button
                                 type="submit"
                                 className="w-full bg-rouge hover:bg-red-700 text-white transition-all font-vollkorn duration-300 ease-in-out transform hover:scale-105"
+                                disabled={!isFormValid}
                             >
                                 <Send className="w-4 h-4 mr-2" />
                                 {send_label}
@@ -112,5 +184,5 @@ export default function ContactSection({ title, address_label, address, phone_la
                 </div>
             </div>
         </section>
-    )
+    );
 }
