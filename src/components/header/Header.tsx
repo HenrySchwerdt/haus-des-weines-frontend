@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Header, Media } from 'payload-types';
 import { motion } from 'framer-motion';
+import LanguageSwitch from '../common/LanguageSwitch';
 
 export function HeaderComponent({ logo, navigation }: Header) {
     const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,7 @@ export function HeaderComponent({ logo, navigation }: Header) {
                     />
                 </Link>
                 <div className="sm:hidden">
+                    <LanguageSwitch />
                     <button type='button' onClick={toggleMenu}>
                         <motion.svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +57,7 @@ export function HeaderComponent({ logo, navigation }: Header) {
                     {navigation?.map((nav) => (
                         <Link key={nav.id} href={nav.link}>{nav.label}</Link>
                     ))}
+                    <LanguageSwitch />
                 </div>
             </div>
             {/* Dropdown menu */}
