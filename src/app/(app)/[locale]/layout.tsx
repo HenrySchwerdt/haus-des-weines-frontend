@@ -11,7 +11,6 @@ const inter = Inter({
 export const metadata = {
   title: "Haus des Weines",
   description: "",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 
