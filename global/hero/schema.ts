@@ -45,6 +45,7 @@ export const Hero: GlobalConfig = {
                 de: 'Überschrift'
             },
             type: 'text',
+            localized: true,
             required: true,
         },
         {
@@ -54,6 +55,7 @@ export const Hero: GlobalConfig = {
                 de: 'Unterüberschrift'
             },
             type: 'text',
+            localized: true,
             required: true,
         },
 
