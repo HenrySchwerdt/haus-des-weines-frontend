@@ -17,12 +17,12 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
-  searchParams,
+  params: { locale },
 }: {
   children: React.ReactNode;
-  searchParams?: { lang?: string };
+  params: { locale: string }
 }) {
-  const lang: 'de' | 'en' = searchParams?.lang === 'en' ? 'en' : 'de';
+  const lang: 'de' | 'en' = locale === 'en' ? 'en' : 'de';
 
   return (
     <html lang={lang}>

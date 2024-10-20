@@ -7,11 +7,11 @@ import { AboutServer } from '@/components/about/Server'
 import { ContactServer } from '@/components/contact/Server'
 export const dynamic = "force-dynamic";
 const Page = async ({
-  searchParams,
+  params: { locale },
 }: {
-  searchParams: { lang?: string };
+  params: { locale: string }
 }) => {
-  const lang: 'de' | 'en' = searchParams.lang === 'en' ? 'en' : 'de';
+  const lang: 'de' | 'en' = locale === 'en' ? 'en' : 'de';
   return (
     <>
       <HeroServer lang={lang} />

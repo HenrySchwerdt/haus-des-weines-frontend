@@ -7,11 +7,11 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { MenuType } from 'payload-types';
 export const dynamic = "force-dynamic";
 export default async function Menu({
-    searchParams,
+    params: { locale },
 }: {
-    searchParams: { lang?: string };
+    params: { locale: string };
 }) {
-    const lang: 'de' | 'en' = searchParams.lang === 'en' ? 'en' : 'de';
+    const lang: 'de' | 'en' = locale === 'en' ? 'en' : 'de';
     const payload = await getPayloadHMR({
         config,
     })
