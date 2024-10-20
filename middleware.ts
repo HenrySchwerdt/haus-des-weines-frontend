@@ -8,10 +8,6 @@ export async function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith('/api')) {
         return NextResponse.next();
     }
-    // when on / home page redirect to /de
-    if (req.nextUrl.pathname === '/') {
-        return NextResponse.redirect('/de');
-    }
     return i18nRouter(req, i18Config);
 
 
