@@ -9,7 +9,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useParams } from "next/navigation"; // To get locale from params
 
 type Language = {
     code: string;
@@ -22,28 +23,24 @@ const languages: Language[] = [
 ];
 
 export default function LanguageSwitch() {
-    const params = useSearchParams()
-    const pathName = usePathname()
     const router = useRouter();
+    const pathName = usePathname();
+    const params = useParams(); // This will give access to locale params
 
-    // Set the initial language based on the "lang" query parameter, defaulting to "de"
-    const getInitialLanguage = (): Language => {
-        const langFromQuery = params.get("lang");
-        const foundLanguage = languages.find(
-            (lang) => lang.code === langFromQuery
-        );
-        return foundLanguage || languages[0]; // Default to "de" if not found
-    };
+    // Get current locale from the params
+    const currentLocale = params?.locale || "de"; // Fallback to 'de' if no locale
 
-    const [currentLanguage, setCurrentLanguage] =
-        React.useState<Language>(getInitialLanguage);
+    // Set the current language based on the locale in the URL
+    const currentLanguage = languages.find(
+        (lang) => lang.code === currentLocale
+    ) || languages[0]; // Default to "de"
 
     const handleLanguageChange = (language: Language) => {
-        setCurrentLanguage(language);
-
-        router.push(pathName + `?lang=${language.code}`, {
-            scroll: false,
-        });
+        if (language.code !== currentLocale) {
+            // Replace the locale in the pathname
+            const newPathname = `/${language.code}${pathName.replace(`/${currentLocale}`, "")}`;
+            router.push(newPathname);
+        }
     };
 
     return (
@@ -69,8 +66,7 @@ export default function LanguageSwitch() {
                         className="flex items-center justify-between"
                     >
                         <span
-                            className={`text-sm ${currentLanguage.code === language.code ? "font-semibold" : ""
-                                }`}
+                            className={`text-sm ${currentLanguage.code === language.code ? "font-semibold" : ""}`}
                         >
                             {language.name}
                         </span>
