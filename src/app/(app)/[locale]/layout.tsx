@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import HeaderServer from "@/components/header/Server";
 import FooterServer from "@/components/footer/Server";
+import { CookieConsentClient } from "@/components/cookie/cookie-consent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,9 @@ export default async function RootLayout({
       <body className={`font-sans flex flex-col min-h-screen`}>
         <HeaderServer lang={lang} />
         {children}
+
+        <CookieConsentClient lang={lang} />
+
         <FooterServer lang={lang} />
       </body>
     </html>

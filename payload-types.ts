@@ -85,6 +85,7 @@ export interface Event {
   description: string;
   image?: (number | null) | Media;
   recurring: boolean;
+  reservation: boolean;
   updatedAt: string;
   createdAt: string;
 }

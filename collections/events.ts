@@ -106,6 +106,15 @@ export const EventItem: CollectionConfig = {
                 de: 'Wiederkehrend',
             },
             required: true,
+        },
+        {
+            name: 'reservation',
+            type: 'checkbox',
+            label: {
+                en: 'Reservation',
+                de: 'Reservierung',
+            },
+            required: true,
         }
     ]
 }

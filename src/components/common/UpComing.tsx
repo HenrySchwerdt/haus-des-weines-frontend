@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { CalendarIcon, ClockIcon, MapPinIcon } from 'lucide-react'
+import { CalendarIcon, ClockIcon, MailIcon, MapPinIcon } from 'lucide-react'
 import { Event, Media } from 'payload-types'
 
 export function UpComing({
@@ -8,8 +8,12 @@ export function UpComing({
     time,
     location,
     description,
-    image
-}: Event) {
+    reservation,
+    image,
+    lang
+}: Event & {
+    lang: 'en' | 'de'
+}) {
     return <div className="flex flex-col md:flex-row bg-stone-100 border border-stone-200 p-6 rounded-lg shadow-sm">
         {image && (
             <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
@@ -35,6 +39,10 @@ export function UpComing({
                     <ClockIcon className="w-4 h-4 mr-2 text-red-700" />
                     {time}
                 </div>
+                {reservation && <div className='flex items-center'>
+                    <MailIcon className="w-4 h-4 mr-2 text-red-700" />
+                    <a href={`mailto:wiesbaden@haus-des-weines.de`}>{lang == 'en' ? 'Reserve here' : 'Hier reservieren'}</a>
+                </div>}
                 <div className="flex items-center">
                     <MapPinIcon className="w-4 h-4 mr-2 text-red-700" />
                     {location}

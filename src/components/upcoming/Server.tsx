@@ -65,7 +65,7 @@ export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
         <div id="events" className="mx-auto">
             <h2 className="font-bold text-2xl md:text-3xl font-vollkorn mb-4">Kommende Veranstaltungen</h2>
             <div className="space-y-6 mt-8">
-                {bestFiveEvents.map((event) => (<UpComing key={event.id} {...event}></UpComing>))}
+                {bestFiveEvents.map((event) => (<UpComing key={event.id} {...event} lang={lang}></UpComing>))}
             </div>
         </div>
     </section>
