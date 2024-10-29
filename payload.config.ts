@@ -86,6 +86,9 @@ export default buildConfig({
     {
       slug: 'media',
       upload: true,
+      access: {
+        read: () => true,
+      },
       fields: [
         {
           name: 'text',
