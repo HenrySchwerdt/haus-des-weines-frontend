@@ -3,6 +3,7 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { Event } from "payload-types"
 import { UpComing } from '../common/UpComing';
 import { Divider } from '../common/Divider';
+import EventCard from './EventCard';
 
 function getBestFiveEvents(events: Event[]): Event[] {
     const today = new Date();
@@ -64,8 +65,8 @@ export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
     return <section className="py-10 lg:px-14 px-4 md:px-6">
         <div id="events" className="mx-auto">
             <h2 className="font-bold text-2xl md:text-3xl font-vollkorn mb-4">Kommende Veranstaltungen</h2>
-            <div className="space-y-6 mt-8">
-                {bestFiveEvents.map((event) => (<UpComing key={event.id} {...event} lang={lang}></UpComing>))}
+            <div className="grid md:grid-cols-2 gap-2 grid-cols-1">
+                {bestFiveEvents.map((event) => (<EventCard key={event.id} {...event} lang={lang}></EventCard>))}
             </div>
         </div>
     </section>

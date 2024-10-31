@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>README.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/henryschwerdtner/develop/hdw/haus-des-weines-frontend/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/henryschwerdtner/develop/hdw/haus-des-weines-frontend/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="payload-30-beta-demo">Payload 3.0 Beta Demo</h1>
+<p>This repo showcases a demo of the Payload 3.0 Beta running completely within Next.js.</p>
+<blockquote>
+<p>[!IMPORTANT]<br>
+It's extremely important to note that as of now, this demo contains BETA software and you are 100% guaranteed to run into bugs / weird stuff.</p>
+<p>We're actively working toward a stable release as fast as we possibly can.</p>
+</blockquote>
+<h3 id="highlights">Highlights</h3>
+<ol>
+<li>Payload is now Next.js-native</li>
+<li>Turbopack works out of the box (this will get faster over time, expect more here)</li>
+<li>The Payload admin UI is built with React Server Components and automatically eliminates server-side code from your admin bundle, completely alleviating the need to use Webpack aliases to remove hooks, access control, etc.</li>
+<li>Payload is now fully-ESM across the board</li>
+<li>GraphQL is now initialized only when you hit the GraphQL endpoint, and does not affect overhead of REST API routes</li>
+<li>All UI components have been abstracted into a separate <code>@payloadcms/ui</code> package, which will be fully documented and exposed for your re-use once we hit stable 3.0 or before</li>
+<li>You can run your own Next.js site alongside of Payload in the same app</li>
+<li>You can now deploy Payload to Vercel and Netlify, and there will be official support for Vercel Blob Storage and Netlify Blobs coming soon (so no S3 needed for files)</li>
+<li>Server-side HMR works out of the box, with no need for <code>nodemon</code> or similar. When the Payload config changes, your app will automatically re-initialize Payload seamlessly in the background</li>
+<li>All custom React components can be server components by default, and you can decide if you want them to be server components or client components</li>
+<li>Sharp has been abstracted to be an optional dependency</li>
+<li>Payload now relies on the Web Request / Response APIs rather than the Node Request / Response</li>
+<li>Express can still be used with Next.js' Custom Server functionality</li>
+<li>Payload itself has slimmed down significantly and can now be fully portable, run anywhere. You can leverage the Payload Local API completely outside of Next.js if you want.</li>
+<li>The data layer, including the shape of the database Payload used and the API responses in 2.0, has not been affected whatsoever</li>
+</ol>
+<h3 id="work-to-come">Work to come</h3>
+<p>We are making this available to our community so that we can gather your feedback and test the new approach that Payload is taking. Don't expect it to be fully functional yet. There are some things that we are aware of that are not yet completed, but we're going to keep blazing through the remaining items as fast as we can to reach stable 3.0 as quickly and efficiently as possible. Here are a few of the items that we are still working on (not a full list):</p>
+<ol>
+<li>Documentation</li>
+<li>Vercel Blob Storage and Netlify Blobs adapter</li>
+<li>Lots of bugs for sure</li>
+<li>100% of tests passing</li>
+<li>Compiler speed improvements (turbo is beta still, it is slower than it should be. it will get faster)</li>
+<li>Overall speed improvements</li>
+<li>An install script to be able to install Payload easily into any existing Next.js app</li>
+<li>A full list of breaking changes for 2.0 -&gt; 3.0, including an in-depth migration guide</li>
+</ol>
+<h3 id="existing-nextjs-project">Existing Next.js project</h3>
+<p>You can install Payload into your existing Next.js project using this command:</p>
+<pre class="hljs"><code><div>npx create-payload-app@beta
+</div></code></pre>
+<p>Contents from <code>src/app</code> will have to be moved into a new directory <code>src/app/(app)</code> so that Payload's root layout and routes can remain isolated from the rest of your app.</p>
+<h3 id="using-this-repo">Using this repo</h3>
+<p>To try out this repo yourself, follow the steps below:</p>
+<ol>
+<li>Clone the repo to your computer (<code>git clone git@github.com:payloadcms/payload-3.0-demo.git</code>)</li>
+<li><code>cd</code> into the new folder by running <code>cd ./payload-3.0-demo</code></li>
+<li>Copy the <code>.env.local.example</code> by running <code>cp .env.local.example .env.local</code> in the repo, then fill out the values including the connection string to your DB</li>
+<li>Install dependencies with whatever package manager you use (<code>pnpm i</code>, <code>npm install</code>, <code>yarn</code>, etc.). <code>pnpm</code> is highly recommended. The usage of yarn v1 is discouraged.</li>
+<li>Start your database. For local postgresql use <code>.\start-database.sh</code> to start it in docker container.</li>
+<li>Fire it up (<code>pnpm dev</code>, <code>npm run dev</code>, <code>yarn dev</code>, etc.)</li>
+<li>Visit https://localhost:3000 and log in with the user created within the config's <code>onInit</code> method</li>
+</ol>
+<h3 id="follow-along-with-breaking-changes">Follow along with breaking changes</h3>
+<p>There is a possibility that we will make breaking changes before releasing the full stable version of Payload 3.0.</p>
+<p><strong>To follow along with breaking changes in advance of the full, stable release,</strong> you can keep an eye on the <a href="https://github.com/payloadcms/payload-3.0-demo/blob/main/CHANGELOG.md">CHANGELOG.md</a>.</p>
+<h3 id="technical-details">Technical details</h3>
+<p><strong>The app folder</strong></p>
+<p>You'll see that Payload requires a few files to be present in your <code>/app</code> folder. There are files for the admin UI as well as files for all route handlers. We've consolidated all admin views into a single <code>page.tsx</code> and consolidated most of the REST endpoints into a single <code>route.ts</code> file for simplicity, but also for development performance. With this pattern, you only have to compile the admin UI / REST API / GraphQL API a single time - and from there, it will be lightning-fast.</p>
+<p><strong>The <code>next.config.js</code> <code>withPayload</code> function</strong></p>
+<p>You'll see in the Next.js config that we have a <code>withPayload</code> function installed. This function is required for Payload to operate, and it ensures compatibility with packages that Payload needs such as <code>drizzle-kit</code>, <code>sharp</code>, <code>pino</code>, and <code>mongodb</code>.</p>
+<p><strong>Using a TypeScript alias to point to your Payload config</strong></p>
+<p>In the <code>tsconfig.json</code> within this repo, you'll see that we have <code>paths</code> set up to point <code>@payload-config</code> to the Payload config, which is located in the root. You can put your config wherever you want. By default, the <code>page.tsx</code> files and <code>route.ts</code> files within the <code>/app</code> folder use this alias. In the future, we might make it optional to use <code>paths</code> - and by default, we might just hard-code relative path imports to the config. We would like to hear your feedback on this part. What do you prefer? Use <code>paths</code> or just use relative imports?</p>
+<hr>
+<h3 id="find-a-bug">Find a bug?</h3>
+<p>Open an issue on this repo at <code>https://github.com/payloadcms/payload-3.0-demo</code> with as much detail as you can provide and we will tackle them as fast as we can. Let's get stable!</p>
+<p>Wenn ein Event kein Titel dann in der Sprache nicht der Anzeigen</p>
+
+</body>
+
+</html>
