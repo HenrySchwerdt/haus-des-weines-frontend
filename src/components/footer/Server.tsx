@@ -23,14 +23,11 @@ export default async function FooterServer({ lang }: { lang: 'en' | 'de' }) {
                 {footer.topNavigation?.map((nav) => (<Link key={nav.id} href={nav.link}>{nav.label}</Link>))}
             </div>
             <div className="flex gap-5 md:w-[150px] justify-end">
-                <Link href="/#events">
+                <Link href="https://www.facebook.com/p/Haus-Des-Weines-100087795773520/">
                     <FaFacebook />
                 </Link>
-                <Link href="/#events">
+                <Link href="https://www.instagram.com/hausdesweines/">
                     <FaInstagram />
-                </Link>
-                <Link href="/#events">
-                    <FaTiktok />
                 </Link>
 
             </div>
