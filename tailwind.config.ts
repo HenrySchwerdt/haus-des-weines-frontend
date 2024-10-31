@@ -24,6 +24,7 @@ export default {
 			},
 			colors: {
 				rouge: '#9C2145',
+				rougelight: '#D13A5B',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {

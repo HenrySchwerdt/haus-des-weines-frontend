@@ -30,7 +30,7 @@ export default async function HeroServer({ lang }: { lang: 'en' | 'de' }) {
                         <p className='text-white font-julius text-lg md:text-2xl mt-4'>
                             {hero.openingHours && hero.openingHours[0].list && hero.openingHours![0].list?.map((item, index) => (
                                 <>
-                                    <span key={index} className='text-rouge mr-2'>{item.timespan}</span>
+                                    <span key={index} className='text-rougelight mr-2'>{item.timespan}</span>
                                     {item.hours}
                                     {index < hero.openingHours![0].list!.length - 1 ? <br /> : ''}
                                 </>

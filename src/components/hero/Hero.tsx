@@ -76,7 +76,7 @@ export default function HeroClient({ hero }: { hero: Hero }) {
                                         animate={{ opacity: 1 }}
                                         transition={{ delay: index * 0.1 }}
                                     >
-                                        <span className="text-rouge mr-2">{item.timespan}</span>
+                                        <span className="text-rougelight mr-2">{item.timespan}</span>
                                         {item.hours}
                                         {index < hero.openingHours![0].list!.length - 1 ? <br /> : ''}
                                     </motion.span>
