@@ -25,7 +25,7 @@ const Page = async ({
 
     return (
         <div>
-            <Booking value={offer.join()} />
+            <Booking value={offer.join()} lang={lang} />
         </div>
     );
 }
