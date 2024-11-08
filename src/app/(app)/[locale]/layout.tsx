@@ -29,7 +29,6 @@ export default async function RootLayout({
       <body className={`font-sans flex flex-col min-h-screen`}>
         <HeaderServer lang={lang} />
         {children}
-
         <CookieConsentClient lang={lang} />
 
         <FooterServer lang={lang} />

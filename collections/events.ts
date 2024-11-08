@@ -115,6 +115,32 @@ export const EventItem: CollectionConfig = {
                 de: 'Reservierung',
             },
             required: true,
-        }
+        },
+        {
+            name: 'price',
+            type: 'number',
+            label: {
+                en: 'Price',
+                de: 'Preis',
+            },
+            admin: {
+                placeholder: {
+                    en: 'Enter the price here',
+                    de: 'Preis hier eingeben',
+                }
+            },
+            required: false,
+        },
+        {
+            name: 'regiondoOffer',
+            label: {
+                en: 'Offer Id',
+                de: 'Angebot Id',
+            },
+            type: 'relationship',
+            relationTo: 'offer-ids',
+            hasMany: false,
+        },
+
     ]
 }

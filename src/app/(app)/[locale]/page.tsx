@@ -12,6 +12,7 @@ const Page = async ({
   params: { locale: string }
 }) => {
   const lang: 'de' | 'en' = locale === 'en' ? 'en' : 'de';
+
   return (
     <>
       <HeroServer lang={lang} />
@@ -24,3 +25,5 @@ const Page = async ({
 }
 
 export default Page
+
+

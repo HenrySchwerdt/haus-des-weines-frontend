@@ -1,9 +1,8 @@
 import config from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
-import { Event } from "payload-types"
-import { UpComing } from '../common/UpComing';
-import { Divider } from '../common/Divider';
-import EventCard from './EventCard';
+import { Event } from "payload-types";
+import UpcomingCard from './UpcomingCard';
+import UpComingCardWithoutImage from './UpcomingCardWithoutImage';
 
 function getBestFiveEvents(events: Event[]): Event[] {
     const today = new Date();
@@ -56,7 +55,16 @@ export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
         return <></>
     }
     const events: Event[] = eventDocs.docs;
-    const bestFiveEvents = getBestFiveEvents(events);
+    const bestFiveEvents = getBestFiveEvents(events).filter(event => event.image != null);
+
+    const recurringEvents = events.filter(event => event.recurring).sort((a, b) => {
+        const aDate = new Date(a.date).getDay();
+        const bDate = new Date(b.date).getDay();
+        if (aDate === bDate) {
+            return a.time > b.time ? 1 : -1;
+        }
+        return aDate - bDate
+    });
 
     if (!bestFiveEvents || bestFiveEvents.length === 0) {
         return <></>
@@ -65,8 +73,12 @@ export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
     return <section className="py-10 lg:px-14 px-4 md:px-6">
         <div id="events" className="mx-auto">
             <h2 className="font-bold text-2xl md:text-3xl font-vollkorn mb-4">Kommende Veranstaltungen</h2>
-            <div className="grid md:grid-cols-2 gap-2 grid-cols-1">
-                {bestFiveEvents.map((event) => (<EventCard key={event.id} {...event} lang={lang}></EventCard>))}
+            <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-4'>
+                {bestFiveEvents.map((event, index) => (<UpcomingCard key={index} {...event} lang={lang} />))}
+            </div>
+            <h2 className="font-bold text-2xl md:text-3xl font-vollkorn my-4">Regelmäßige Veranstaltungen</h2>
+            <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-4'>
+                {recurringEvents.map((event, index) => (<UpComingCardWithoutImage key={index} {...event} lang={lang} />))}
             </div>
         </div>
     </section>

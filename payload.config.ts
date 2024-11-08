@@ -40,6 +40,8 @@ import { NormalItem } from 'collections/normal-item'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { Imprint } from 'global/imprint/schema'
 import { Privacy } from 'global/privacy/schema'
+import { OfferIds } from 'collections/offer-ids'
+import { Offers } from 'global/offers/schema'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -64,6 +66,7 @@ export default buildConfig({
     About,
     Contact,
     Footer,
+    Offers,
   ],
   collections: [
     Producer,
@@ -74,6 +77,7 @@ export default buildConfig({
     FoodItem,
     ClothingCategories,
     ClothingItem,
+    OfferIds,
     {
       slug: 'users',
       auth: true,

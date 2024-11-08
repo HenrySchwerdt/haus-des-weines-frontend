@@ -19,6 +19,7 @@ export interface Config {
     food: Food;
     'clothing-categories': ClothingCategory;
     clothing: Clothing;
+    'offer-ids': OfferId;
     users: User;
     media: Media;
     'payload-locked-documents': PayloadLockedDocument;
@@ -37,6 +38,7 @@ export interface Config {
     about: About;
     contact: Contact;
     footer: Footer;
+    offers: Offer;
   };
   locale: 'en' | 'de';
   user: User & {
@@ -86,6 +88,8 @@ export interface Event {
   image?: (number | null) | Media;
   recurring: boolean;
   reservation: boolean;
+  price?: number | null;
+  regiondoOffer?: (number | null) | OfferId;
   updatedAt: string;
   createdAt: string;
 }
@@ -107,6 +111,16 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offer-ids".
+ */
+export interface OfferId {
+  id: number;
+  offerId: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -246,6 +260,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'clothing';
         value: number | Clothing;
+      } | null)
+    | ({
+        relationTo: 'offer-ids';
+        value: number | OfferId;
       } | null)
     | ({
         relationTo: 'users';
@@ -485,6 +503,22 @@ export interface Footer {
     | {
         label: string;
         link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
+ */
+export interface Offer {
+  id: number;
+  offers?:
+    | {
+        name: number | OfferId;
+        html: string;
         id?: string | null;
       }[]
     | null;
