@@ -20,7 +20,7 @@ export default function UpComingCardWithoutImage({
     lang
 }: EventCardProps) {
     return (
-        <Card className="w-full max-w-sm overflow-hidden">
+        <Card className="w-full max-w-sm overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
             <div className="p-6 flex items-center justify-center min-h-[100px] border-b bg-rouge">
                 <div className="text-center space-y-2">
                     <CalendarDays className="w-12 h-12 mx-auto text-white/80" />
