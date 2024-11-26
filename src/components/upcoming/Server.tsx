@@ -55,7 +55,7 @@ export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
         return <></>
     }
     const events: Event[] = eventDocs.docs;
-    const bestFiveEvents = getBestFiveEvents(events).filter(event => event.image != null);
+    const bestFiveEvents = getBestFiveEvents(events.filter(event => !event.recurring)).filter(event => event.image != null);
 
     const recurringEvents = events.filter(event => event.recurring).sort((a, b) => {
         const aDate = new Date(a.date).getDay();
@@ -72,14 +72,14 @@ export default async function UpComingServer({ lang }: { lang: 'en' | 'de' }) {
 
     return <section className="py-10 lg:px-14 px-4 md:px-6">
         <div id="events" className="mx-auto">
-            <h2 className="font-bold text-2xl md:text-3xl font-vollkorn mb-4">Kommende Veranstaltungen</h2>
-            <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-4'>
-                {bestFiveEvents.map((event, index) => (<UpcomingCard key={index} {...event} lang={lang} />))}
-            </div>
-            <h2 className="font-bold text-2xl md:text-3xl font-vollkorn my-4">Regelmäßige Veranstaltungen</h2>
-            <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-4'>
-                {recurringEvents.map((event, index) => (<UpComingCardWithoutImage key={index} {...event} lang={lang} />))}
-            </div>
+            {bestFiveEvents && bestFiveEvents.length > 0 && <><h2 className="font-bold text-2xl md:text-3xl font-vollkorn mb-4">Kommende Veranstaltungen</h2>
+                <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-4'>
+                    {bestFiveEvents.map((event, index) => (<UpcomingCard key={index} {...event} lang={lang} />))}
+                </div></>}
+            {recurringEvents && recurringEvents.length > 0 && <><h2 className="font-bold text-2xl md:text-3xl font-vollkorn my-4">Regelmäßige Veranstaltungen</h2>
+                <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-4'>
+                    {recurringEvents.map((event, index) => (<UpComingCardWithoutImage key={index} {...event} lang={lang} />))}
+                </div></>}
         </div>
     </section>
 }
