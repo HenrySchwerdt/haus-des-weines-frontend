@@ -32,18 +32,19 @@ export default async function Menu({
         return <div className='mx-auto'>No items found</div>
     }
 
-    return (<div className='mx-auto'><MenuGroup title={(wines[0].type! as MenuType).name}>
-        {wines.map((wine) => (
-            <WineMenuItem key={wine.id} {...wine} />
-        ))}
+    return (<div className='mx-auto'>
+        {wines && wines.length > 0 && <MenuGroup title={(wines[0].type! as MenuType).name}>
+            {wines.map((wine) => (
+                <WineMenuItem key={wine.id} {...wine} />
+            ))}
 
 
-    </MenuGroup>
-        <MenuGroup title={(normalItems[0].type! as MenuType).name}>
+        </MenuGroup>}
+        {normalItems && normalItems.length > 0 && <MenuGroup title={(normalItems[0].type! as MenuType).name}>
             {normalItems.map((item) => (
                 <SmallMenuItem key={item.id} {...item} />
             ))}
-        </MenuGroup>
+        </MenuGroup>}
         <MenuNotice />
     </div>
     )
